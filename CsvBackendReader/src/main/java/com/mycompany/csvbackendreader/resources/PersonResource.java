@@ -34,7 +34,7 @@ public class PersonResource {
         return pServ.addPerson(person);
     }
     
-    @Path("/{personId}/csv")
+    @Path("/csv")
     public CsvResource csv(){
     return new CsvResource();
     }

@@ -26,4 +26,16 @@ public class CsvService {
     
         return csvRepo.getCsvList();
     }
+    public List<CsvClass> getPersonCsv(int personId){
+        return csvRepo.getPersonCsv(personId);
+    
+    }
+    public CsvClass updateCsv(CsvClass csv){
+    
+        return csvRepo.updateCsv(csv);
+    }
+    public void removeCsv(int id){
+        System.out.println("ServiceRemovecsv" + id);
+        csvRepo.removeCsv(id);
+    }
 }

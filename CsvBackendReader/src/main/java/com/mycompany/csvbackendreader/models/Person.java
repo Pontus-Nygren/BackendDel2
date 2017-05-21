@@ -92,10 +92,7 @@ public class Person implements Serializable {
         return csvList;
     }
 
-    public void setCsvList(List<CsvClass> csvList) {
-        this.csvList = csvList;
-    }
-  
+   
     
             
 }

@@ -29,9 +29,27 @@ public class CsvResource {
     }
     
     @POST
-    @Path("/{personId}") // /person/id/csv/id
+    @Path("/{personId}") // /person/csv/id
     public CsvClass addCsv(@PathParam("personId") int personId,CsvClass csv){
         System.out.println("Id i resource" + personId);
     return cServ.addCsv(personId, csv);
     }
+    @GET
+    @Path("/{personId}") // person/csv/id
+    public List<CsvClass> getPersonCsv(@PathParam("personId") int personId){
+    return cServ.getPersonCsv(personId);
+    }
+    
+    @PUT
+    public CsvClass updateCsv(CsvClass csv){
+        return cServ.updateCsv(csv);
+    
+    }
+    @DELETE
+    @Path("/{orderNr}") // /person/id/csv/ordernr
+    public void removeCsv(@PathParam("orderNr")int id){
+        System.out.println("DELETE CSV I RES" + id);
+        cServ.removeCsv(id);
+    }
+
 }
