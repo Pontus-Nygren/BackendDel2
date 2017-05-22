@@ -28,8 +28,24 @@ public class PersonRepo {
     
     public List<Person> getPersons(){
         Session session2 = NewHibernateUtil.getSession();
+        session2.beginTransaction();
         List<Person> persons = session2.createCriteria(Person.class).list();
+        
+        session2.getTransaction().commit();
+        session2.close();
+        
         return persons;
     
+    }
+    public Person getPerson(int id){
+        Session session2 = NewHibernateUtil.getSession();
+        session2.beginTransaction();
+        Person person = (Person)session2.get(Person.class, id);
+        person.getCsvList().size();
+        session2.getTransaction().commit();
+        session2.close();
+        System.out.println("Person: " + person.getFirstName() +" Lista " + person.getCsvList().size());
+        return person;
+        
     }
 }

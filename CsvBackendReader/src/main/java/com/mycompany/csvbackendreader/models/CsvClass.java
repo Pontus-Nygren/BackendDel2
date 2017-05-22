@@ -38,10 +38,10 @@ public class CsvClass implements Serializable {
     public void setPerson(Person person) {
         this.person = person;
     }
-
-    public Person getPerson() {
-        return person;
-    }
+//
+//    public Person getPerson() {
+//        return person;
+//    }
 
    public CsvClass() {
     }

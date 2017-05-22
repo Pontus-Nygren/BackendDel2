@@ -23,6 +23,9 @@ public class PersonService {
     public List<Person> getPersons(){
         return pR.getPersons();
     }
+    public Person getPerson(int id){
+    return pR.getPerson(id);
+    }
     
     
     public Person addPerson(Person person){

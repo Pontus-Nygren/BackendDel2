@@ -33,12 +33,12 @@ public class Person implements Serializable {
     public Person() {
     }
 
-      public Person(int id, String firstName, String lastName, String eMail, String role, String passWord) {
+      public Person(int id, String firstName, String lastName, String eMail, String roletype, String passWord) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.eMail = eMail;
-        this.roletype = role;
+        this.roletype = roletype;
         this.passWord = passWord;
     }
 

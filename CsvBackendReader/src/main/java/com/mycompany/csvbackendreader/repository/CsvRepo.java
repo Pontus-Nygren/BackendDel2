@@ -6,6 +6,7 @@
 package com.mycompany.csvbackendreader.repository;
 
 import com.mycompany.csvbackendreader.models.CsvClass;
+import com.mycompany.csvbackendreader.models.Person;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -21,17 +22,19 @@ public class CsvRepo {
         
         Session session = NewHibernateUtil.getSession();
         session.beginTransaction();
+        csv.setPerson(pRepo.getPerson(id));
+        pRepo.getPerson(id).getCsvList().add(csv);
         
-        for(int i=0; i<pRepo.getPersons().size(); i++ ){
-            if(pRepo.getPersons().get(i).getId() == id){
-                System.out.println("id i repo" + id);
-                csv.setPerson(pRepo.getPersons().get(i));
-                pRepo.getPersons().get(i).getCsvList().add(csv);
-                
-                }
+//        for(int i=0; i<pRepo.getPersons().size(); i++ ){
+//            if(pRepo.getPersons().get(i).getId() == id){
+//                System.out.println("id i repo" + id);
+//                csv.setPerson(pRepo.getPersons().get(i));
+//                pRepo.getPersons().get(i).getCsvList().add(csv);
+//                
+//                }
             
         
-        }
+//        }
                  session.save(csv);
                  session.getTransaction().commit();
                  session.close();
@@ -45,25 +48,48 @@ public class CsvRepo {
     public List<CsvClass> getCsvList(){
         Session session2 = NewHibernateUtil.getSession();
         List<CsvClass> persons = session2.createCriteria(CsvClass.class).list();
-        return persons;
+        
+        
+        
+                return persons;
     
     }
-    public List<CsvClass> getPersonCsv(int personId){
-       List<CsvClass> csvList = null;
-        System.out.println("Person REPO id" + personId);
-        for(int i = 0; i<pRepo.getPersons().size(); i++){
-            if(pRepo.getPersons().get(i).getId() == personId){
-                Session session2 = NewHibernateUtil.getSession();
-                session2.beginTransaction();
-                csvList = pRepo.getPersons().get(i).getCsvList();
-                session2.beginTransaction().commit();
-                session2.close();
-//        List<CsvClass> csvList = session2.createCriteria(CsvClass.class).list();
-            }
-        }
-        
-        return csvList;
     
+    // behöver nog inte använda denna.. 
+    public List<CsvClass> getPersonCsv(int personId){
+//       List<CsvClass> csvListReturn = null;
+//        System.out.println("Person REPO id" + personId);
+////        for(int i = 0; i<pRepo.getPersons().size(); i++){
+////            if(pRepo.getPersons().get(i).getId() == personId){
+                Session session = NewHibernateUtil.getSession();
+                session.beginTransaction();
+//               List<Person> csvList = session2.createCriteria(Person.class).list();
+//                for(int i =0; i<csvList.size(); i++){
+//                if(csvList.get(i).getId() == personId){
+//                    for(int j=0; j<csvList.get(i).getCsvList().size();j++){
+//                        csvListReturn.add(csvList.get(i).getCsvList().get(j));
+//                    
+//                    }
+//                
+//                }
+//                
+//                }
+////                csvList = pRepo.getPersons().get(i).getCsvList();
+//                session2.beginTransaction().commit();
+//                
+////        List<CsvClass> csvList = session2.createCriteria(CsvClass.class).list();
+////            }
+////        }
+//        
+//        return csvListReturn;
+//    
+
+List<CsvClass> csv = (List<CsvClass>) session.createSQLQuery(
+    "SELECT * FROM CsvClass WHERE person_id = :id")
+    .addEntity(CsvClass.class)
+    .setParameter("id", personId).list();
+
+return csv;
     }
     
     

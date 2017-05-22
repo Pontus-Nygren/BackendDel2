@@ -28,6 +28,13 @@ public class PersonResource {
     public List<Person> getPersons(){
         return pServ.getPersons();
     }
+    @GET
+    @Path("/{personId}")
+    public Person getPerson(@PathParam("personId")int id){
+        System.out.println("ResourcePerson csv " + pServ.getPerson(id).getCsvList().size());
+        return pServ.getPerson(id);
+    
+    }
     
     @POST
     public Person addPerson(Person person){
