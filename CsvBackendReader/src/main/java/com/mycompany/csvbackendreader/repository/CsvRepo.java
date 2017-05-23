@@ -18,7 +18,9 @@ import org.hibernate.Session;
 public class CsvRepo {
     // Lägga till ett CSV objekt för en viss person.
     PersonRepo pRepo = new PersonRepo();
-     public CsvClass addCsv(int id, CsvClass csv){
+    
+    
+    public CsvClass addCsv(int id, CsvClass csv){
         
         Session session = NewHibernateUtil.getSession();
         session.beginTransaction();
@@ -98,11 +100,11 @@ return csv;
         Session session = NewHibernateUtil.getSession();
         session.beginTransaction();
        
-        Query q = session.createQuery("update CsvClass set date = :newDate, CLName = :newLname, address = :newaddress, cFName = :newFname, comment = :newComment where orderNr = :orderNr");
-        q.setParameter("newDate", csv.getDate());
-        q.setParameter("newLname", csv.getCLName());
-        q.setParameter("newaddress", csv.getAddress());
-        q.setParameter("newFname", csv.getcFName());
+        Query q = session.createQuery("update CsvClass set comment = :newComment where orderNr = :orderNr");
+//        q.setParameter("newDate", csv.getDate());
+//        q.setParameter("newLname", csv.getCLName());
+//        q.setParameter("newaddress", csv.getAddress());
+//        q.setParameter("newFname", csv.getcFName());
         q.setParameter("newComment", csv.getComment());
         q.setParameter("orderNr", csv.getOrderNr());
         q.executeUpdate();
